@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="Yakuza.PasswordGenerator.Pages.Edit"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yakuza.PasswordGenerator.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Yakuza.PasswordGenerator.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+   <Grid x:Name="LayoutRoot">
+
+      <Grid.ChildrenTransitions>
+         <TransitionCollection>
+            <EntranceThemeTransition/>
+         </TransitionCollection>
+      </Grid.ChildrenTransitions>
+
+      <Grid.RowDefinitions>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <!-- Title Panel -->
+      <StackPanel Grid.Row="0" Margin="19,0,0,0">
+         <TextBlock Text="edit" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+      </StackPanel>
+
+      <!--TODO: Content should be placed within the following grid-->
+      <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+         <ScrollViewer>
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+               <StackPanel.Resources>
+                  <converters:NegationConverter x:Key="NegationConverter"/>
+               </StackPanel.Resources>
+               <TextBox Name="Domain" Header="Domain name" InputScope="Url"/>
+               <TextBox Name="Username" Header="Username" InputScope="AlphanumericFullWidth"/>
+               <TextBox Name="EntryTag" Header="Tag (optional)" InputScope="AlphanumericFullWidth"
+                IsEnabled="{Binding ElementName=TagAsCurrentMonth, Path=IsChecked, Converter={StaticResource NegationConverter}}"/>
+
+               <TextBox Name="Length" Header="Password length" InputScope="Number"/>
+               <CheckBox Name="UseSpecials" Content="Use special characters"/>
+               <CheckBox Name="UseDigits" Content="Use digits"/>
+               <CheckBox Name="UseCapitals" Content="Use capital letters"/>
+               <CheckBox Name="TagAsCurrentMonth" Content="Use current month as Tag"/>
+               <CheckBox Name="IsFavorite" Content="Favorite"/>
+            </StackPanel>
+         </ScrollViewer>
+      </Grid>
+   </Grid>
+
+   <Page.BottomAppBar>
+      <CommandBar IsSticky="True">
+         <CommandBar.PrimaryCommands>
+            <AppBarButton Label="save" Click="SaveClicked" Icon="Save"/>
+            <AppBarButton Label="cancel" Click="CancelClicked" Icon="Cancel"/>
+            <AppBarButton Label="delete" Click="DeleteClicked" Icon="Delete"/>
+         </CommandBar.PrimaryCommands>
+      </CommandBar>
+   </Page.BottomAppBar>
+</Page>

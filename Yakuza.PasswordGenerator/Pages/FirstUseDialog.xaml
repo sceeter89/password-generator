@@ -1,0 +1,26 @@
+﻿<ContentDialog
+    x:Class="Yakuza.PasswordGenerator.Pages.FirstUseDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yakuza.PasswordGenerator.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Welcome"
+    PrimaryButtonText="ok"  
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+         <!-- Content body -->
+        <TextBlock Name="body" Style="{StaticResource MessageDialogContentStyle}" TextWrapping="Wrap"
+                   xml:space="preserve">
+            <TextBlock.Text>
+   Thank you for choosing UniqP. This application helps you to stay safe while browsing the Internet by generating unique passwords for every account you have.
+
+First you have to generate your unique secret code which will be used to generate passwords. After generating secret code please note it down in safe place in order to be able to use your passwords again after changing or loosing your phone.
+               
+Press 'ok' to continue.
+            </TextBlock.Text>
+        </TextBlock>
+    </StackPanel>
+</ContentDialog>

@@ -1,0 +1,44 @@
+﻿<Page xmlns:Primitives="using:Telerik.UI.Xaml.Controls.Primitives" 
+    x:Class="Yakuza.PasswordGenerator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Yakuza.PasswordGenerator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+   <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
+                             VerticalAlignment="Center" Grid.Row="0" Tapped="FavoritesTapped" IsTapEnabled="True"
+                             ImageSource="/Images/Icons/favs.png" Title="Favorites"/>
+
+      <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
+                             VerticalAlignment="Center" Grid.Row="1" Tapped="BrowseTapped" IsTapEnabled="True"
+                             ImageSource="/Images/Icons/feature.search.png" Title="Search"/>
+
+      <TextBlock Grid.Row="2" HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" Margin="10">
+         Unique Passwords by Yakuza
+      </TextBlock>
+   </Grid>
+   <Page.BottomAppBar>
+      <CommandBar IsSticky="True">
+         <CommandBar.PrimaryCommands>
+            <AppBarButton Icon="Setting" Click="SettingsClicked" Label="settings"/>
+            <AppBarButton Icon="Add" Click="AddClicked" Label="add"/>
+            <AppBarButton Icon="ReportHacked"  Click="LockClicked" Label="lock"/>
+            
+         </CommandBar.PrimaryCommands>
+         <CommandBar.SecondaryCommands>
+            <AppBarButton Label="help" Click="HelpClicked"/>
+            <AppBarButton Label="rate" Click="RateClicked"/>
+         </CommandBar.SecondaryCommands>
+      </CommandBar>
+   </Page.BottomAppBar>
+</Page>
