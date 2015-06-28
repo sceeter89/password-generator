@@ -21,26 +21,41 @@
          <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 
-      <!-- Title Panel -->
-      <StackPanel Grid.Row="0" Margin="19,0,0,0">
-         <TextBlock Text="settings" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-      </StackPanel>
-
       <!--TODO: Content should be placed within the following grid-->
       <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-         <StackPanel>
-            <CheckBox x:Name="DefaultUseDigits" Content="Include digits by default" Checked="UseDigitsChecked"/>
-            <CheckBox x:Name="DefaultUseCapitals" Content="Include capital letters by default" Checked="UseCapitalsChecked"/>
-            <CheckBox x:Name="DefaultUseSpecials" Content="Include special characters by default" Checked="UseSpecialsChecked"/>
-         </StackPanel>
+         <Pivot>
+            <PivotItem Header="defaults">
+               <StackPanel>
+                  <CheckBox x:Name="DefaultUseDigits" Content="Include digits by default" Checked="UseDigitsChecked"/>
+                  <CheckBox x:Name="DefaultUseCapitals" Content="Include capital letters by default" Checked="UseCapitalsChecked"/>
+                  <CheckBox x:Name="DefaultUseSpecials" Content="Include special characters by default" Checked="UseSpecialsChecked"/>
+               </StackPanel>
+            </PivotItem>
+            <PivotItem Header="lock screen">
+               <StackPanel>
+                  <CheckBox x:Name="EnableLockScreen" Content="Enable lock screen" Checked="EnableLockScreenChecked"/>
+
+                  <StackPanel Orientation="Horizontal">
+                     <Button Content="change background" Click="SetLockBackgroundClicked"/>
+                     <Image Width="80" Height="80" Margin="10" Name="BackgroundPreview"/>
+                  </StackPanel>
+
+                  <Button Content="set unlock secret" Click="SetLockBackgroundClicked"/>
+               </StackPanel>
+            </PivotItem>
+         </Pivot>
+
       </Grid>
    </Grid>
 
    <Page.BottomAppBar>
       <CommandBar IsSticky="True">
+         <CommandBar.PrimaryCommands>
+            <AppBarButton Label="help" Click="HelpClicked" Icon="Help"/>
+         </CommandBar.PrimaryCommands>
          <CommandBar.SecondaryCommands>
-            <AppBarButton Label="Generate new secret key" Click="GenerateClicked"/>
-            <AppBarButton Label="Input secret key" Click="InputClicked"/>
+            <AppBarButton Label="generate new secret key" Click="GenerateClicked"/>
+            <AppBarButton Label="override secret key" Click="InputClicked"/>
          </CommandBar.SecondaryCommands>
       </CommandBar>
    </Page.BottomAppBar>

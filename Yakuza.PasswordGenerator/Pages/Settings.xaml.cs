@@ -105,19 +105,26 @@ namespace Yakuza.PasswordGenerator.Pages
          await dialog.ShowAsync();
       }
 
-      void UseDigitsChecked(object sender, RoutedEventArgs e)
+      private void UseDigitsChecked(object sender, RoutedEventArgs e)
       {
          SettingsProvider.IncludeDigitsByDefault = DefaultUseDigits.IsChecked ?? false;
       }
 
-      void UseCapitalsChecked(object sender, RoutedEventArgs e)
+      private void UseCapitalsChecked(object sender, RoutedEventArgs e)
       {
          SettingsProvider.IncludeCapitalsByDefault = DefaultUseCapitals.IsChecked ?? false;
       }
 
-      void UseSpecialsChecked(object sender, RoutedEventArgs e)
+      private void UseSpecialsChecked(object sender, RoutedEventArgs e)
       {
          SettingsProvider.IncludeSpecialsByDefault = DefaultUseSpecials.IsChecked ?? false;
+      }
+
+      private async void SetLockBackgroundClicked(object sender, RoutedEventArgs e)
+      {
+         var dialog = new InputSecretDialog();
+
+         await dialog.ShowAsync();
       }
    }
 }

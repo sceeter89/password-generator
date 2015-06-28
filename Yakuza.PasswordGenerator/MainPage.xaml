@@ -24,7 +24,7 @@
                              ImageSource="/Images/Icons/feature.search.png" Title="Search"/>
 
       <TextBlock Grid.Row="2" HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" Margin="10">
-         Unique Passwords by Yakuza
+         Uniq Password by Yakuza
       </TextBlock>
    </Grid>
    <Page.BottomAppBar>
@@ -33,7 +33,6 @@
             <AppBarButton Icon="Setting" Click="SettingsClicked" Label="settings"/>
             <AppBarButton Icon="Add" Click="AddClicked" Label="add"/>
             <AppBarButton Icon="ReportHacked"  Click="LockClicked" Label="lock"/>
-            
          </CommandBar.PrimaryCommands>
          <CommandBar.SecondaryCommands>
             <AppBarButton Label="help" Click="HelpClicked"/>
