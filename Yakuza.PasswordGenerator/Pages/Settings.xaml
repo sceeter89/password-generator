@@ -32,16 +32,26 @@
                </StackPanel>
             </PivotItem>
             <PivotItem Header="lock screen">
-               <StackPanel>
-                  <CheckBox x:Name="EnableLockScreen" Content="Enable lock screen" Checked="EnableLockScreenChecked"/>
+               <ScrollViewer>
+                  <Grid>
+                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                     </Grid.RowDefinitions>
+                     
+                     <CheckBox x:Name="EnableLockScreen" Content="Enable lock screen" Checked="EnableLockScreenChecked"/>
 
-                  <StackPanel Orientation="Horizontal">
-                     <Button Content="change background" Click="SetLockBackgroundClicked"/>
-                     <Image Width="80" Height="80" Margin="10" Name="BackgroundPreview"/>
-                  </StackPanel>
-
-                  <Button Content="set unlock secret" Click="SetLockBackgroundClicked"/>
-               </StackPanel>
+                     <TextBox InputScope="Number" Grid.Row="1" Text="5"/>
+                     
+                     <Image Source="/Images/LockScreens/tree.jpg" Grid.Row="2" Stretch="Fill"
+                         Width="300" Height="400" HorizontalAlignment="Left"/>
+                     <Image Source="/Images/LockScreens/overlay.png" Grid.Row="2" Stretch="Fill"
+                         Width="300" Height="400" PointerPressed="OverlayPressed" HorizontalAlignment="Left"/>
+                     <Rectangle x:Name="Marker" Width="40" Height="47" Grid.Row="2" StrokeThickness="4" Stroke="White"
+                                HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
+                  </Grid>
+               </ScrollViewer>
             </PivotItem>
          </Pivot>
 

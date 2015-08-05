@@ -11,12 +11,6 @@ namespace Yakuza.PasswordGenerator.Services
          set { Set(value); }
       }
 
-      public static string Pin
-      {
-         get { return Get<string>(); }
-         set { Set(value); }
-      }
-
       public static bool IncludeDigitsByDefault
       {
          get { return Get(fallback: true); }
@@ -34,6 +28,14 @@ namespace Yakuza.PasswordGenerator.Services
          get { return Get(fallback: true); }
          set { Set(value); }
       }
+
+      public static string LockScreenBackground
+      {
+         get { return Get(fallback: "tree.jpg"); }
+         set { Set(value); }
+      }
+
+
 
       private static T Get<T>([CallerMemberName] string key = null, T fallback = default(T))
       {

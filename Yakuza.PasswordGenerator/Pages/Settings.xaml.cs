@@ -5,6 +5,11 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Yakuza.PasswordGenerator.Model;
 using Yakuza.PasswordGenerator.Services;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Media;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Input;
 
 namespace Yakuza.PasswordGenerator.Pages
 {
@@ -95,7 +100,7 @@ namespace Yakuza.PasswordGenerator.Pages
 
       private void GenerateClicked(object sender, RoutedEventArgs e)
       {
-         Frame.Navigate(typeof (GenerateSecret));
+         Frame.Navigate(typeof(GenerateSecret));
       }
 
       private async void InputClicked(object sender, RoutedEventArgs e)
@@ -120,11 +125,35 @@ namespace Yakuza.PasswordGenerator.Pages
          SettingsProvider.IncludeSpecialsByDefault = DefaultUseSpecials.IsChecked ?? false;
       }
 
+      private void EnableLockScreenChecked(object sender, RoutedEventArgs e)
+      {
+         SettingsProvider.IncludeSpecialsByDefault = DefaultUseSpecials.IsChecked ?? false;
+      }
+
       private async void SetLockBackgroundClicked(object sender, RoutedEventArgs e)
       {
          var dialog = new InputSecretDialog();
 
          await dialog.ShowAsync();
+      }
+
+      private void HelpClicked(object sender, RoutedEventArgs e)
+      {
+
+      }
+
+      private void OverlayPressed(object sender, PointerRoutedEventArgs e)
+      {
+         Pointer ptr = e.Pointer;
+         var point = PointerPoint.GetCurrentPoint(ptr.PointerId);
+
+         var position = point.Position;
+
+         var x = (int)(position.X / 37) - 1;
+         var y = (int)(position.Y / 44) - 6;
+
+         Marker.Visibility = Visibility.Visible;
+         Marker.Margin = new Thickness(x * 37, y * 44, 0, 0);
       }
    }
 }
