@@ -11,6 +11,12 @@ namespace Yakuza.PasswordGenerator.Services
          set { Set(value); }
       }
 
+      public static int DefaultPasswordLength
+      {
+         get { return Get(fallback: 10); }
+         set { Set(value); }
+      }
+
       public static bool IncludeDigitsByDefault
       {
          get { return Get(fallback: true); }

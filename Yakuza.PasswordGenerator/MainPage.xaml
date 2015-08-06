@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
 
    <Grid>
       <Grid.RowDefinitions>
@@ -14,16 +15,29 @@
          <RowDefinition Height="*"/>
          <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*"/>
+         <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
 
       <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
                              VerticalAlignment="Center" Grid.Row="0" Tapped="FavoritesTapped" IsTapEnabled="True"
-                             ImageSource="/Images/Icons/favs.png" Title="Favorites"/>
+                             ImageSource="/Images/Icons/overflowdots.png" Title="Browse"/>
 
       <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
-                             VerticalAlignment="Center" Grid.Row="1" Tapped="BrowseTapped" IsTapEnabled="True"
+                             VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"  Tapped="BrowseTapped" IsTapEnabled="True"
                              ImageSource="/Images/Icons/feature.search.png" Title="Search"/>
 
-      <TextBlock Grid.Row="2" HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" Margin="10">
+      <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
+                             VerticalAlignment="Center" Grid.Row="1" Tapped="FavoritesTapped" IsTapEnabled="True"
+                             ImageSource="/Images/Icons/add.png" Title="Add"/>
+
+      <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
+                             VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  Tapped="BrowseTapped" IsTapEnabled="True"
+                             ImageSource="/Images/Icons/feature.settings.png" Title="Settings"/>
+
+      <TextBlock Grid.Row="2" HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" Margin="10"
+                 Grid.ColumnSpan="2">
          Uniq Password by Yakuza
       </TextBlock>
    </Grid>
@@ -32,7 +46,7 @@
          <CommandBar.PrimaryCommands>
             <AppBarButton Icon="Setting" Click="SettingsClicked" Label="settings"/>
             <AppBarButton Icon="Add" Click="AddClicked" Label="add"/>
-            <AppBarButton Icon="ReportHacked"  Click="LockClicked" Label="lock"/>
+            <!--<AppBarButton Icon="ReportHacked"  Click="LockClicked" Label="lock"/>-->
          </CommandBar.PrimaryCommands>
          <CommandBar.SecondaryCommands>
             <AppBarButton Label="help" Click="HelpClicked"/>

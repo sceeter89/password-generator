@@ -5,9 +5,12 @@
     xmlns:local="using:Yakuza.PasswordGenerator.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:qk="using:QKit"
     xmlns:converters="using:Yakuza.PasswordGenerator.Converters"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Edit}">
+
 
    <Grid x:Name="LayoutRoot">
 
@@ -26,36 +29,39 @@
       <StackPanel Grid.Row="0" Margin="19,0,0,0">
          <TextBlock Text="edit" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
       </StackPanel>
+      <qk:InputAwarePanel Grid.Row="1">
+         <!--TODO: Content should be placed within the following grid-->
+         <Grid x:Name="ContentRoot" Margin="19,9.5,19,0"
+               DataContext="{Binding EditedEntry}">
+            <ScrollViewer>
+               <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                  <StackPanel.Resources>
+                     <converters:NegationConverter x:Key="NegationConverter"/>
+                  </StackPanel.Resources>
+                  <TextBox Name="Domain" Header="Domain name" InputScope="Url" Text="{Binding Domain}"/>
+                  <TextBox Name="Username" Header="Username" InputScope="AlphanumericFullWidth" Text="{Binding Username}"/>
+                  <TextBox Name="EntryTag" Header="Tag (optional)" InputScope="AlphanumericFullWidth"
+                IsEnabled="{Binding ElementName=TagAsCurrentMonth, Path=IsChecked, Converter={StaticResource NegationConverter}}"
+                           Text="{Binding Tag}"/>
 
-      <!--TODO: Content should be placed within the following grid-->
-      <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-         <ScrollViewer>
-            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-               <StackPanel.Resources>
-                  <converters:NegationConverter x:Key="NegationConverter"/>
-               </StackPanel.Resources>
-               <TextBox Name="Domain" Header="Domain name" InputScope="Url"/>
-               <TextBox Name="Username" Header="Username" InputScope="AlphanumericFullWidth"/>
-               <TextBox Name="EntryTag" Header="Tag (optional)" InputScope="AlphanumericFullWidth"
-                IsEnabled="{Binding ElementName=TagAsCurrentMonth, Path=IsChecked, Converter={StaticResource NegationConverter}}"/>
-
-               <TextBox Name="Length" Header="Password length" InputScope="Number"/>
-               <CheckBox Name="UseSpecials" Content="Use special characters"/>
-               <CheckBox Name="UseDigits" Content="Use digits"/>
-               <CheckBox Name="UseCapitals" Content="Use capital letters"/>
-               <CheckBox Name="TagAsCurrentMonth" Content="Use current month as Tag"/>
-               <CheckBox Name="IsFavorite" Content="Favorite"/>
-            </StackPanel>
-         </ScrollViewer>
-      </Grid>
+                  <TextBox Name="Length" Header="Password length" InputScope="Number" Text="{Binding PasswordLength}"/>
+                  <CheckBox Name="UseSpecials" Content="Use special characters" IsChecked="{Binding UseSpecialCharacters}"/>
+                  <CheckBox Name="UseDigits" Content="Use digits" IsChecked="{Binding UseDigits}"/>
+                  <CheckBox Name="UseCapitals" Content="Use capital letters" IsChecked="{Binding UseCapitals}"/>
+                  <CheckBox Name="TagAsCurrentMonth" Content="Use current month as Tag" IsChecked="{Binding TagAsCurrentMonth}"/>
+                  <CheckBox Name="IsFavorite" Content="Favorite" IsChecked="{Binding IsFavorite}"/>
+               </StackPanel>
+            </ScrollViewer>
+         </Grid>
+      </qk:InputAwarePanel>
    </Grid>
 
    <Page.BottomAppBar>
       <CommandBar IsSticky="True">
          <CommandBar.PrimaryCommands>
-            <AppBarButton Label="save" Click="SaveClicked" Icon="Save"/>
-            <AppBarButton Label="cancel" Click="CancelClicked" Icon="Cancel"/>
-            <AppBarButton Label="delete" Click="DeleteClicked" Icon="Delete"/>
+            <AppBarButton Label="save" Command="{Binding SaveChangesCommand}" Icon="Save"/>
+            <AppBarButton Label="cancel" Command="{Binding CancelCommand}"  Icon="Cancel"/>
+            <AppBarButton Label="delete" Command="{Binding DeleteCommand}"  Icon="Delete"/>
          </CommandBar.PrimaryCommands>
       </CommandBar>
    </Page.BottomAppBar>

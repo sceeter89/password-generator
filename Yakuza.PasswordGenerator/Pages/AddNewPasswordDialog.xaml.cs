@@ -26,7 +26,7 @@ namespace Yakuza.PasswordGenerator.Pages
             Id = -1,
             Domain = Domain.Text,
             Username = Username.Text,
-            PasswordLength = (int)Length.Value,
+            PasswordLength = SettingsProvider.DefaultPasswordLength,
             UseCapitalLetters = SettingsProvider.IncludeCapitalsByDefault,
             UseDigits = SettingsProvider.IncludeDigitsByDefault,
             UseSpecialCharacters = SettingsProvider.IncludeSpecialsByDefault,
