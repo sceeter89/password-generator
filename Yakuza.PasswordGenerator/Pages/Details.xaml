@@ -49,6 +49,7 @@
       <CommandBar IsSticky="True">
          <CommandBar.PrimaryCommands>
             <AppBarButton Label="edit" Command="{Binding EditCommand}"  Icon="Edit"/>
+            <AppBarButton Label="delete" Command="{Binding DeleteCommand}"  Icon="Delete"/>
          </CommandBar.PrimaryCommands>
       </CommandBar>
    </Page.BottomAppBar>

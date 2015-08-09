@@ -1,9 +1,6 @@
-using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Yakuza.PasswordGenerator.Pages;
-using Windows.UI.Xaml.Controls;
 using Yakuza.PasswordGenerator.Messages.Actions;
 using System.Collections;
 using Yakuza.PasswordGenerator.Model;
@@ -14,31 +11,13 @@ namespace Yakuza.PasswordGenerator.ViewModel
    public class SearchViewModel : ViewModelBase
    {
       private readonly IMessenger _bus;
-      private bool _isBusy;
 
       public SearchViewModel(IMessenger bus)
       {
          _bus = bus;
 
-         AddCommand = new RelayCommand(Add);
-         DetailsCommand = new RelayCommand<PasswordEntry>(OpenDetails);
-      }
-
-      private void OpenDetails(PasswordEntry selectedEntry)
-      {
-         _bus.Send(new ShowEntryDetailsMessage(selectedEntry));
-      }
-
-      private async void Add()
-      {
-         //TODO: Extract this functionality to common place
-         var dialog = new AddNewPasswordDialog();
-         var result = await dialog.ShowAsync();
-
-         if (result == ContentDialogResult.Primary)
-         {
-            _bus.Send(new EditEntryMessage(dialog.NewEntry));
-         }
+         AddCommand = new RelayCommand(() => _bus.Send(new AddPasswordEntryMessage()));
+         DetailsCommand = new RelayCommand<PasswordEntry>(entry => _bus.Send(new ShowEntryDetailsMessage(entry)));
       }
 
       public IList Items

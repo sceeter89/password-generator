@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight;
 using Yakuza.PasswordGenerator.Services;
+using Yakuza.PasswordGenerator.Services.ActionsHandlers;
 
 namespace Yakuza.PasswordGenerator.ViewModel
 {
@@ -29,6 +30,7 @@ namespace Yakuza.PasswordGenerator.ViewModel
          SimpleIoc.Default.Register<MainViewModel>();
 
          SimpleIoc.Default.Register<NavigationRouter>(true);
+         SimpleIoc.Default.Register<AddPasswordEntryHandler>(true);
       }
 
       public MainViewModel Main

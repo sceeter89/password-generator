@@ -1,22 +1,25 @@
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Windows.UI.Popups;
 using Yakuza.PasswordGenerator.Messages.Actions;
 using Yakuza.PasswordGenerator.Model;
+using Yakuza.PasswordGenerator.Services;
 
 namespace Yakuza.PasswordGenerator.ViewModel
 {
    public class DetailsViewModel : ViewModelBase
    {
-      public DetailsViewModel(IMessenger bus)
+      public DetailsViewModel(IMessenger messenger, INavigationService navigation)
       {
-         _bus = bus;
+         _messenger = messenger;
+         _navigation = navigation;
          if (IsInDesignMode)
          {
             Entry = new PasswordEntry
             {
                Domain = "company.com",
-               IsFavorite = true,
                PasswordLength = 15,
                Tag = "Some tag",
                TagAsCurrentMonth = false,
@@ -28,7 +31,8 @@ namespace Yakuza.PasswordGenerator.ViewModel
          }
 
          GenerateCommand = new RelayCommand(Generate);
-         EditCommand = new RelayCommand(() => _bus.Send(new EditEntryMessage(Entry)));
+         EditCommand = new RelayCommand(() => _messenger.Send(new EditEntryMessage(Entry)));
+         DeleteCommand = new RelayCommand(Delete);
       }
       
       private void Generate()
@@ -38,9 +42,23 @@ namespace Yakuza.PasswordGenerator.ViewModel
          Password = password;
       }
 
-      private PasswordEntry _editedEntry;
-      private readonly IMessenger _bus;
+      private async void Delete()
+      {
+         var dialog = new MessageDialog("Please confirm that you want to remove this entry.", "Confirmation")
+         {
+            Options = MessageDialogOptions.AcceptUserInputAfterDelay
+         };
+         dialog.Commands.Add(new UICommand("confirm", a => PasswordStorage.Entries.Remove(Entry)));
+         dialog.Commands.Add(new UICommand("cancel"));
+         var result = await dialog.ShowAsync();
+
+         _navigation.GoBack();
+      }
+
+      private PasswordEntry _entry;
+      private readonly IMessenger _messenger;
       private string _password;
+      private readonly INavigationService _navigation;
 
       public string Password
       {
@@ -59,11 +77,11 @@ namespace Yakuza.PasswordGenerator.ViewModel
       {
          get
          {
-            return _editedEntry;
+            return _entry;
          }
          set
          {
-            _editedEntry = value;
+            _entry = value;
             Password = string.Empty;
             RaisePropertyChanged(() => Entry);
          }
@@ -71,5 +89,6 @@ namespace Yakuza.PasswordGenerator.ViewModel
 
       public RelayCommand GenerateCommand { get; private set; }
       public RelayCommand EditCommand { get; private set; }
+      public RelayCommand DeleteCommand { get; private set; }
    }
 }

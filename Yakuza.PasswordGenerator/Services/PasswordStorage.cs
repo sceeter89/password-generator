@@ -56,7 +56,7 @@ namespace Yakuza.PasswordGenerator.Services
             connection.CreateTable<PasswordEntry>();
 
             var id = connection.Insert(entry);
-            entry.Id = id;
+            //entry.Id = id;
 
             connection.Commit();
          }

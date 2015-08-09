@@ -16,24 +16,13 @@ namespace Yakuza.PasswordGenerator.ViewModel
       {
          _bus = bus;
 
-         AddCommand = new RelayCommand(Add);
+         AddCommand = new RelayCommand(() => _bus.Send(new AddPasswordEntryMessage()));
          BrowseCommand = new RelayCommand(Browse);
          SearchCommand = new RelayCommand(() => _bus.Send(new SearchForEntryMessage()));
          SettingsCommand = new RelayCommand(() => _bus.Send(new ShowSettingsMessage()));
          LockCommand = new RelayCommand(Lock);
          HelpCommand = new RelayCommand(() => _bus.Send(new ShowHelpMessage()));
          RateCommand = new RelayCommand(Rate);
-      }
-
-      private async void Add()
-      {
-         var dialog = new AddNewPasswordDialog();
-         var result = await dialog.ShowAsync();
-
-         if (result == ContentDialogResult.Primary)
-         {
-            _bus.Send(new EditEntryMessage(dialog.NewEntry));
-         }
       }
 
       private void Browse()

@@ -110,16 +110,6 @@ namespace Yakuza.PasswordGenerator.Model
          }
       }
 
-      public bool IsFavorite
-      {
-         get { return _isFavorite; }
-         set
-         {
-            _isFavorite = value;
-            OnPropertyChanged();
-         }
-      }
-
       public event PropertyChangedEventHandler PropertyChanged;
 
       protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -49,7 +49,6 @@
                   <CheckBox Name="UseDigits" Content="Use digits" IsChecked="{Binding UseDigits, Mode=TwoWay}"/>
                   <CheckBox Name="UseCapitals" Content="Use capital letters" IsChecked="{Binding UseCapitalLetters, Mode=TwoWay}"/>
                   <CheckBox Name="TagAsCurrentMonth" Content="Use current month as Tag" IsChecked="{Binding TagAsCurrentMonth, Mode=TwoWay}"/>
-                  <CheckBox Name="IsFavorite" Content="Favorite" IsChecked="{Binding IsFavorite, Mode=TwoWay}"/>
                </StackPanel>
             </ScrollViewer>
          </Grid>
@@ -61,7 +60,6 @@
          <CommandBar.PrimaryCommands>
             <AppBarButton Label="save" Command="{Binding SaveChangesCommand}" Icon="Save"/>
             <AppBarButton Label="cancel" Command="{Binding CancelCommand}"  Icon="Cancel"/>
-            <AppBarButton Label="delete" Command="{Binding DeleteCommand}"  Icon="Delete"/>
          </CommandBar.PrimaryCommands>
       </CommandBar>
    </Page.BottomAppBar>
