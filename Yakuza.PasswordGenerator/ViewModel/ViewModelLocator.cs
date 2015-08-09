@@ -1,6 +1,8 @@
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using GalaSoft.MvvmLight;
+using Yakuza.PasswordGenerator.Services;
 
 namespace Yakuza.PasswordGenerator.ViewModel
 {
@@ -10,20 +12,23 @@ namespace Yakuza.PasswordGenerator.ViewModel
       {
          ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-         ////if (ViewModelBase.IsInDesignModeStatic)
-         ////{
-         ////    // Create design time view services and models
-         ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-         ////}
-         ////else
-         ////{
-         ////    // Create run time view services and models
-         ////    SimpleIoc.Default.Register<IDataService, DataService>();
-         ////}
+         if (ViewModelBase.IsInDesignModeStatic)
+         {
+            // Create design time view services and models
+         }
+         else
+         {
+            // Create run time view services and models
+            SimpleIoc.Default.Register(() => Messenger.Default);
+         }
          SimpleIoc.Default.Register<INavigationService, NavigationService>();
-         SimpleIoc.Default.Register(() => Messenger.Default);
+
          SimpleIoc.Default.Register<EditViewModel>();
+         SimpleIoc.Default.Register<SearchViewModel>();
+         SimpleIoc.Default.Register<DetailsViewModel>();
          SimpleIoc.Default.Register<MainViewModel>();
+
+         SimpleIoc.Default.Register<NavigationRouter>(true);
       }
 
       public MainViewModel Main
@@ -39,6 +44,22 @@ namespace Yakuza.PasswordGenerator.ViewModel
          get
          {
             return ServiceLocator.Current.GetInstance<EditViewModel>();
+         }
+      }
+
+      public DetailsViewModel Details
+      {
+         get
+         {
+            return ServiceLocator.Current.GetInstance<DetailsViewModel>();
+         }
+      }
+
+      public SearchViewModel Search
+      {
+         get
+         {
+            return ServiceLocator.Current.GetInstance<SearchViewModel>();
          }
       }
 

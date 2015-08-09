@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Details}">
 
    <Grid x:Name="LayoutRoot">
 
@@ -23,7 +24,7 @@
 
       <!-- Title Panel -->
       <StackPanel Grid.Row="0" Margin="19,0,0,0">
-         <TextBlock Text="{Binding Domain}" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+         <TextBlock Text="{Binding Entry.Domain}" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
       </StackPanel>
 
       <!--TODO: Content should be placed within the following grid-->
@@ -34,22 +35,20 @@
             <RowDefinition Height="Auto"/>
          </Grid.RowDefinitions>
          <StackPanel>
-            <TextBlock Text="{Binding Username}" FontSize="25" TextWrapping="Wrap"/>
-            <TextBlock Text="{Binding Tag}" FontSize="20" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding Entry.Username}" FontSize="25" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding Entry.Tag}" FontSize="20" TextWrapping="Wrap"/>
          </StackPanel>
          <Primitives:RadHubTile Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                                 ImageSource="/Images/Icons/download.png" Title="Generate password"
-                                IsTapEnabled="True" Tapped="GeneratePassword"/>
-         <TextBlock Grid.Row="2" x:Name="PasswordTextBlock" FontSize="30" Margin="5,0,5,30"
-                    TextWrapping="Wrap"/>
+                                Command="{Binding GenerateCommand}"/>
+         <TextBlock Grid.Row="2" FontSize="30" Margin="5,0,5,30" TextWrapping="Wrap" Text="{Binding Password}"/>
       </Grid>
    </Grid>
 
    <Page.BottomAppBar>
       <CommandBar IsSticky="True">
          <CommandBar.PrimaryCommands>
-            <AppBarButton x:Name="FavButton" Label="favorite" Click="FavClicked" Icon="Favorite"/>
-            <AppBarButton Label="edit" Click="EditClicked" Icon="Edit"/>
+            <AppBarButton Label="edit" Command="{Binding EditCommand}"  Icon="Edit"/>
          </CommandBar.PrimaryCommands>
       </CommandBar>
    </Page.BottomAppBar>

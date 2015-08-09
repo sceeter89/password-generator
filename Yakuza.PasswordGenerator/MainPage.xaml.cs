@@ -69,44 +69,5 @@ namespace Yakuza.PasswordGenerator
       {
          _navigationHelper.OnNavigatedFrom(e);
       }
-
-      private void SettingsClicked(object sender, RoutedEventArgs e)
-      {
-         Frame.Navigate(typeof(Settings));
-      }
-
-      private async void AddClicked(object sender, RoutedEventArgs e)
-      {
-         var dialog = new AddNewPasswordDialog();
-         var result = await dialog.ShowAsync();
-
-         if (result == ContentDialogResult.Primary)
-            Frame.Navigate(typeof(Edit), dialog.NewEntry);
-      }
-
-      private void BrowseTapped(object sender, TappedRoutedEventArgs e)
-      {
-         Frame.Navigate(typeof(Browse));
-      }
-
-      private void FavoritesTapped(object sender, TappedRoutedEventArgs e)
-      {
-         Frame.Navigate(typeof(Favorites));
-      }
-
-      private void HelpClicked(object sender, RoutedEventArgs e)
-      {
-         Frame.Navigate(typeof(Help));
-      }
-
-      private void LockClicked(object sender, RoutedEventArgs e)
-      {
-         Frame.Navigate(typeof(UnlockScreen));
-      }
-
-      private void RateClicked(object sender, RoutedEventArgs e)
-      {
-         //TODO: Navigate to Store ratings
-      }
    }
 }

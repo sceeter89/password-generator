@@ -1,19 +1,9 @@
-﻿using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Navigation;
+﻿using Windows.UI.Xaml.Navigation;
 using Yakuza.PasswordGenerator.Common;
-using Yakuza.PasswordGenerator.Model;
-using Yakuza.PasswordGenerator.Services;
 
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Yakuza.PasswordGenerator.Pages
 {
-   /// <summary>
-   /// An empty page that can be used on its own or navigated to within a Frame.
-   /// </summary>
    public sealed partial class Details
    {
       private readonly NavigationHelper _navigationHelper;
@@ -90,9 +80,6 @@ namespace Yakuza.PasswordGenerator.Pages
       protected override void OnNavigatedTo(NavigationEventArgs e)
       {
          _navigationHelper.OnNavigatedTo(e);
-
-         DataContext = e.Parameter;
-         FavButton.IsEnabled = (DataContext as PasswordEntry).IsFavorite == false;
       }
 
       protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -101,27 +88,5 @@ namespace Yakuza.PasswordGenerator.Pages
       }
 
       #endregion
-
-      private void GeneratePassword(object sender, TappedRoutedEventArgs e)
-      {
-         var password = Services.PasswordGenerator.Generate(DataContext as PasswordEntry);
-
-         PasswordTextBlock.Text = password;
-      }
-
-      private void FavClicked(object sender, RoutedEventArgs e)
-      {
-         var item = DataContext as PasswordEntry;
-         item.IsFavorite = true;
-         PasswordStorage.UpdateItem(item);
-         FavButton.IsEnabled = false;
-      }
-
-      private void EditClicked(object sender, RoutedEventArgs e)
-      {
-         var item = DataContext as PasswordEntry;
-         
-         Frame.Navigate(typeof(Edit), item);
-      }
    }
 }

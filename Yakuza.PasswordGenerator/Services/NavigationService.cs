@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Yakuza.PasswordGenerator.ViewModel
+namespace Yakuza.PasswordGenerator.Services
 {
    public interface INavigationService
    {

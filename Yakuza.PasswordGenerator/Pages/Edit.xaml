@@ -38,18 +38,18 @@
                   <StackPanel.Resources>
                      <converters:NegationConverter x:Key="NegationConverter"/>
                   </StackPanel.Resources>
-                  <TextBox Name="Domain" Header="Domain name" InputScope="Url" Text="{Binding Domain}"/>
-                  <TextBox Name="Username" Header="Username" InputScope="AlphanumericFullWidth" Text="{Binding Username}"/>
+                  <TextBox Name="Domain" Header="Domain name" InputScope="Url" Text="{Binding Domain, Mode=TwoWay}"/>
+                  <TextBox Name="Username" Header="Username" InputScope="AlphanumericFullWidth" Text="{Binding Username, Mode=TwoWay}"/>
                   <TextBox Name="EntryTag" Header="Tag (optional)" InputScope="AlphanumericFullWidth"
                 IsEnabled="{Binding ElementName=TagAsCurrentMonth, Path=IsChecked, Converter={StaticResource NegationConverter}}"
-                           Text="{Binding Tag}"/>
+                           Text="{Binding Tag, Mode=TwoWay}"/>
 
-                  <TextBox Name="Length" Header="Password length" InputScope="Number" Text="{Binding PasswordLength}"/>
-                  <CheckBox Name="UseSpecials" Content="Use special characters" IsChecked="{Binding UseSpecialCharacters}"/>
-                  <CheckBox Name="UseDigits" Content="Use digits" IsChecked="{Binding UseDigits}"/>
-                  <CheckBox Name="UseCapitals" Content="Use capital letters" IsChecked="{Binding UseCapitals}"/>
-                  <CheckBox Name="TagAsCurrentMonth" Content="Use current month as Tag" IsChecked="{Binding TagAsCurrentMonth}"/>
-                  <CheckBox Name="IsFavorite" Content="Favorite" IsChecked="{Binding IsFavorite}"/>
+                  <TextBox Name="Length" Header="Password length" InputScope="Number" Text="{Binding PasswordLength, Mode=TwoWay}"/>
+                  <CheckBox Name="UseSpecials" Content="Use special characters" IsChecked="{Binding UseSpecialCharacters, Mode=TwoWay}"/>
+                  <CheckBox Name="UseDigits" Content="Use digits" IsChecked="{Binding UseDigits, Mode=TwoWay}"/>
+                  <CheckBox Name="UseCapitals" Content="Use capital letters" IsChecked="{Binding UseCapitalLetters, Mode=TwoWay}"/>
+                  <CheckBox Name="TagAsCurrentMonth" Content="Use current month as Tag" IsChecked="{Binding TagAsCurrentMonth, Mode=TwoWay}"/>
+                  <CheckBox Name="IsFavorite" Content="Favorite" IsChecked="{Binding IsFavorite, Mode=TwoWay}"/>
                </StackPanel>
             </ScrollViewer>
          </Grid>

@@ -1,20 +1,10 @@
-﻿using Yakuza.PasswordGenerator.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
+﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Yakuza.PasswordGenerator.Common;
+using Yakuza.PasswordGenerator.Model;
+using Yakuza.PasswordGenerator.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -23,18 +13,17 @@ namespace Yakuza.PasswordGenerator.Pages
    /// <summary>
    /// An empty page that can be used on its own or navigated to within a Frame.
    /// </summary>
-   public sealed partial class Favorites : Page
+   public sealed partial class Search
    {
-      private NavigationHelper navigationHelper;
-      private ObservableDictionary defaultViewModel = new ObservableDictionary();
+      private readonly NavigationHelper _navigationHelper;
 
-      public Favorites()
+      public Search()
       {
-         this.InitializeComponent();
+         InitializeComponent();
 
-         this.navigationHelper = new NavigationHelper(this);
-         this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-         this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+         _navigationHelper = new NavigationHelper(this);
+         _navigationHelper.LoadState += NavigationHelper_LoadState;
+         _navigationHelper.SaveState += NavigationHelper_SaveState;
       }
 
       /// <summary>
@@ -42,16 +31,7 @@ namespace Yakuza.PasswordGenerator.Pages
       /// </summary>
       public NavigationHelper NavigationHelper
       {
-         get { return this.navigationHelper; }
-      }
-
-      /// <summary>
-      /// Gets the view model for this <see cref="Page"/>.
-      /// This can be changed to a strongly typed view model.
-      /// </summary>
-      public ObservableDictionary DefaultViewModel
-      {
-         get { return this.defaultViewModel; }
+         get { return _navigationHelper; }
       }
 
       /// <summary>
@@ -98,14 +78,21 @@ namespace Yakuza.PasswordGenerator.Pages
       /// handlers that cannot cancel the navigation request.</param>
       protected override void OnNavigatedTo(NavigationEventArgs e)
       {
-         this.navigationHelper.OnNavigatedTo(e);
+         _navigationHelper.OnNavigatedTo(e);
       }
+
 
       protected override void OnNavigatedFrom(NavigationEventArgs e)
       {
-         this.navigationHelper.OnNavigatedFrom(e);
+         _navigationHelper.OnNavigatedFrom(e);
       }
 
       #endregion
+
+      private void ItemClicked(object sender, ItemClickEventArgs e)
+      {
+         var searchViewModel = DataContext as SearchViewModel;
+         searchViewModel.DetailsCommand.Execute(e.ClickedItem as PasswordEntry);
+      }
    }
 }

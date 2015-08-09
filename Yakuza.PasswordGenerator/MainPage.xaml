@@ -21,19 +21,19 @@
       </Grid.ColumnDefinitions>
 
       <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
-                             VerticalAlignment="Center" Grid.Row="0" Tapped="FavoritesTapped" IsTapEnabled="True"
+                             VerticalAlignment="Center" Grid.Row="0" Command="{Binding BrowseCommand}"
                              ImageSource="/Images/Icons/overflowdots.png" Title="Browse"/>
 
       <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
-                             VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"  Tapped="BrowseTapped" IsTapEnabled="True"
+                             VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Command="{Binding SearchCommand}"
                              ImageSource="/Images/Icons/feature.search.png" Title="Search"/>
 
       <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
-                             VerticalAlignment="Center" Grid.Row="1" Tapped="FavoritesTapped" IsTapEnabled="True"
+                             VerticalAlignment="Center" Grid.Row="1" Command="{Binding AddCommand}"
                              ImageSource="/Images/Icons/add.png" Title="Add"/>
 
       <Primitives:RadHubTile Background="{ThemeResource PhoneAccentBrush}" HorizontalAlignment="Center"
-                             VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  Tapped="BrowseTapped" IsTapEnabled="True"
+                             VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Command="{Binding SettingsCommand}"
                              ImageSource="/Images/Icons/feature.settings.png" Title="Settings"/>
 
       <TextBlock Grid.Row="2" HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" Margin="10"
@@ -44,13 +44,11 @@
    <Page.BottomAppBar>
       <CommandBar IsSticky="True">
          <CommandBar.PrimaryCommands>
-            <AppBarButton Icon="Setting" Click="SettingsClicked" Label="settings"/>
-            <AppBarButton Icon="Add" Click="AddClicked" Label="add"/>
             <!--<AppBarButton Icon="ReportHacked"  Click="LockClicked" Label="lock"/>-->
          </CommandBar.PrimaryCommands>
          <CommandBar.SecondaryCommands>
-            <AppBarButton Label="help" Click="HelpClicked"/>
-            <AppBarButton Label="rate" Click="RateClicked"/>
+            <AppBarButton Label="help" Command="{Binding HelpCommand}"/>
+            <AppBarButton Label="rate" Command="{Binding RateCommand}"/>
          </CommandBar.SecondaryCommands>
       </CommandBar>
    </Page.BottomAppBar>

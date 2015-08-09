@@ -1,39 +1,54 @@
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Yakuza.PasswordGenerator.Pages;
+using Windows.UI.Xaml.Controls;
+using Yakuza.PasswordGenerator.Messages.Actions;
 
 namespace Yakuza.PasswordGenerator.ViewModel
 {
-   /// <summary>
-   /// This class contains properties that the main View can data bind to.
-   /// <para>
-   /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-   /// </para>
-   /// <para>
-   /// You can also use Blend to data bind with the tool's support.
-   /// </para>
-   /// <para>
-   /// See http://www.galasoft.ch/mvvm
-   /// </para>
-   /// </summary>
    public class MainViewModel : ViewModelBase
    {
       private readonly IMessenger _bus;
 
-      /// <summary>
-      /// Initializes a new instance of the MainViewModel class.
-      /// </summary>
       public MainViewModel(IMessenger bus)
       {
          _bus = bus;
-         ////if (IsInDesignMode)
-         ////{
-         ////    // Code runs in Blend --> create design time data.
-         ////}
-         ////else
-         ////{
-         ////    // Code runs "for real"
-         ////}
+
+         AddCommand = new RelayCommand(Add);
+         BrowseCommand = new RelayCommand(Browse);
+         SearchCommand = new RelayCommand(() => _bus.Send(new SearchForEntryMessage()));
+         SettingsCommand = new RelayCommand(() => _bus.Send(new ShowSettingsMessage()));
+         LockCommand = new RelayCommand(Lock);
+         HelpCommand = new RelayCommand(() => _bus.Send(new ShowHelpMessage()));
+         RateCommand = new RelayCommand(Rate);
+      }
+
+      private async void Add()
+      {
+         var dialog = new AddNewPasswordDialog();
+         var result = await dialog.ShowAsync();
+
+         if (result == ContentDialogResult.Primary)
+         {
+            _bus.Send(new EditEntryMessage(dialog.NewEntry));
+         }
+      }
+
+      private void Browse()
+      {
+         throw new NotImplementedException();
+      }
+
+      private void Lock()
+      {
+         throw new NotImplementedException();
+      }
+
+      private void Rate()
+      {
+         throw new NotImplementedException();
       }
 
       public RelayCommand AddCommand { get; private set; }

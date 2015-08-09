@@ -1,10 +1,5 @@
-﻿using Windows.UI.Popups;
-using Windows.UI.Xaml;
-using Yakuza.PasswordGenerator.Common;
-using System;
+﻿using Yakuza.PasswordGenerator.Common;
 using Windows.UI.Xaml.Navigation;
-using Yakuza.PasswordGenerator.Model;
-using Yakuza.PasswordGenerator.Services;
 
 namespace Yakuza.PasswordGenerator.Pages
 {
@@ -30,7 +25,7 @@ namespace Yakuza.PasswordGenerator.Pages
       /// </summary>
       public NavigationHelper NavigationHelper
       {
-         get { return this._navigationHelper; }
+         get { return _navigationHelper; }
       }
 
 
@@ -79,19 +74,6 @@ namespace Yakuza.PasswordGenerator.Pages
       protected override void OnNavigatedTo(NavigationEventArgs e)
       {
          _navigationHelper.OnNavigatedTo(e);
-
-         DataContext = e.Parameter;
-         var item = DataContext as PasswordEntry;
-
-         Domain.Text = item.Domain ?? "";
-         Username.Text = item.Username ?? "";
-         EntryTag.Text = item.Tag ?? "";
-         TagAsCurrentMonth.IsChecked = item.TagAsCurrentMonth;
-         UseSpecials.IsChecked = item.UseSpecialCharacters;
-         UseCapitals.IsChecked = item.UseCapitalLetters;
-         UseDigits.IsChecked = item.UseDigits;
-         Length.Text = item.PasswordLength.ToString();
-         IsFavorite.IsChecked = item.IsFavorite;
       }
 
       protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -100,40 +82,5 @@ namespace Yakuza.PasswordGenerator.Pages
       }
 
       #endregion
-
-      private void SaveClicked(object sender, RoutedEventArgs e)
-      {
-         var item = DataContext as PasswordEntry;
-         item.Domain = Domain.Text;
-         item.Username = Username.Text;
-         item.Tag = EntryTag.Text;
-         item.TagAsCurrentMonth = TagAsCurrentMonth.IsChecked.HasValue && TagAsCurrentMonth.IsChecked.Value;
-         item.UseSpecialCharacters = UseSpecials.IsChecked.HasValue && UseSpecials.IsChecked.Value;
-         item.UseCapitalLetters = UseCapitals.IsChecked.HasValue && UseCapitals.IsChecked.Value;
-         item.UseDigits = UseDigits.IsChecked.HasValue && UseDigits.IsChecked.Value;
-         item.PasswordLength = int.Parse(Length.Text);
-         item.IsFavorite = IsFavorite.IsChecked.HasValue && IsFavorite.IsChecked.Value;
-         PasswordStorage.UpdateItem(item);
-
-         Frame.GoBack();
-      }
-
-      private async void DeleteClicked(object sender, RoutedEventArgs e)
-      {
-         var dialog = new MessageDialog("Please confirm that you want to remove this entry.", "Confirmation")
-         {
-            Options = MessageDialogOptions.AcceptUserInputAfterDelay
-         };
-         dialog.Commands.Add(new UICommand("confirm", a => PasswordStorage.Entries.Remove(DataContext as PasswordEntry)));
-         dialog.Commands.Add(new UICommand("cancel"));
-         var result = await dialog.ShowAsync();
-
-         Frame.GoBack();
-      }
-
-      private void CancelClicked(object sender, RoutedEventArgs e)
-      {
-         Frame.GoBack();
-      }
    }
 }
