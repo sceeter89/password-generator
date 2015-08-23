@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using Windows.Storage;
 using SQLite.Net;
 using SQLite.Net.Platform.WinRT;
 using Yakuza.PasswordGenerator.Model;
@@ -11,8 +10,6 @@ namespace Yakuza.PasswordGenerator.Services
 {
    public static class PasswordStorage
    {
-      private static readonly StorageFolder Folder = ApplicationData.Current.LocalFolder;
-
       static PasswordStorage()
       {
          Entries = new ObservableCollection<PasswordEntry>();

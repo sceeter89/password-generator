@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Yakuza.PasswordGenerator.Messages.Navigation;
 using Yakuza.PasswordGenerator.Model;
 using Yakuza.PasswordGenerator.Services;
 
@@ -8,10 +9,9 @@ namespace Yakuza.PasswordGenerator.ViewModel
 {
    public class EditViewModel : ViewModelBase
    {
-      public EditViewModel(IMessenger bus, INavigationService navigation)
+      public EditViewModel(IMessenger messenger)
       {
-         _navigation = navigation;
-         _bus = bus;
+         _messenger = messenger;
          if (IsInDesignMode)
          {
             EditedEntry = new PasswordEntry
@@ -33,18 +33,17 @@ namespace Yakuza.PasswordGenerator.ViewModel
 
       private void Cancel()
       {
-         _navigation.GoBack();
+         _messenger.Send(new GoBack());
       }
 
       private void SaveChanges()
       {
          PasswordStorage.UpdateItem(EditedEntry);
-         _navigation.GoBack();
+         _messenger.Send(new GoBack());
       }
 
       private PasswordEntry _editedEntry;
-      private readonly IMessenger _bus;
-      private readonly INavigationService _navigation;
+      private readonly IMessenger _messenger;
 
       public PasswordEntry EditedEntry
       {

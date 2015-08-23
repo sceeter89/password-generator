@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using System;
+using GalaSoft.MvvmLight.Messaging;
 using Yakuza.PasswordGenerator.Messages.Actions;
+using Yakuza.PasswordGenerator.Messages.Navigation;
 using Yakuza.PasswordGenerator.Pages;
 using Yakuza.PasswordGenerator.ViewModel;
 
@@ -23,6 +25,18 @@ namespace Yakuza.PasswordGenerator.Services
          messenger.Register<ShowSettingsMessage>(this, HandleSettings);
          messenger.Register<ShowHelpMessage>(this, HandleHelp);
          messenger.Register<SearchForEntryMessage>(this, HandleSearching);
+         messenger.Register<GoBack>(this, HandleNavigationBack);
+         messenger.Register<OpenDirectoriesBrowserMessage>(this, HandleBrowsingDirectories);
+      }
+
+      private void HandleBrowsingDirectories(OpenDirectoriesBrowserMessage obj)
+      {
+         _navigation.Navigate(typeof(BrowseDirectories));
+      }
+
+      private void HandleNavigationBack(GoBack obj)
+      {
+         _navigation.GoBack();
       }
 
       private void HandleEdit(EditEntryMessage message)

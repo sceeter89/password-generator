@@ -17,7 +17,7 @@ namespace Yakuza.PasswordGenerator.ViewModel
          _bus = bus;
 
          AddCommand = new RelayCommand(() => _bus.Send(new AddPasswordEntryMessage()));
-         BrowseCommand = new RelayCommand(Browse);
+         BrowseCommand = new RelayCommand(() => _bus.Send(new OpenDirectoriesBrowserMessage()));
          SearchCommand = new RelayCommand(() => _bus.Send(new SearchForEntryMessage()));
          SettingsCommand = new RelayCommand(() => _bus.Send(new ShowSettingsMessage()));
          LockCommand = new RelayCommand(Lock);

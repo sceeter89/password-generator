@@ -1,17 +1,14 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using SQLite.Net.Attributes;
+﻿using SQLite.Net.Attributes;
 
 namespace Yakuza.PasswordGenerator.Model
 {
    [Table("PasswordEntries")]
-   public class PasswordEntry : INotifyPropertyChanged
+   public class PasswordEntry : ModelBase
    {
       private string _domain;
       private string _username;
       private bool _useSpecialCharacters;
       private int _passwordLength;
-      private bool _isFavorite;
       private int _id;
       private string _tag;
       private bool _tagAsCurrentMonth;
@@ -65,7 +62,7 @@ namespace Yakuza.PasswordGenerator.Model
          get { return _tagAsCurrentMonth; }
          set
          {
-            _tagAsCurrentMonth = value; 
+            _tagAsCurrentMonth = value;
             OnPropertyChanged();
          }
       }
@@ -108,14 +105,6 @@ namespace Yakuza.PasswordGenerator.Model
             _passwordLength = value;
             OnPropertyChanged();
          }
-      }
-
-      public event PropertyChangedEventHandler PropertyChanged;
-
-      protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-      {
-         var handler = PropertyChanged;
-         if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
       }
    }
 }

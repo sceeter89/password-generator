@@ -27,6 +27,7 @@ namespace Yakuza.PasswordGenerator.ViewModel
          SimpleIoc.Default.Register<EditViewModel>();
          SimpleIoc.Default.Register<SearchViewModel>();
          SimpleIoc.Default.Register<DetailsViewModel>();
+         SimpleIoc.Default.Register<BrowseDirectoriesViewModel>();
          SimpleIoc.Default.Register<MainViewModel>();
 
          SimpleIoc.Default.Register<NavigationRouter>(true);
@@ -62,6 +63,14 @@ namespace Yakuza.PasswordGenerator.ViewModel
          get
          {
             return ServiceLocator.Current.GetInstance<SearchViewModel>();
+         }
+      }
+
+      public BrowseDirectoriesViewModel BrowseDirectories
+      {
+         get
+         {
+            return ServiceLocator.Current.GetInstance<BrowseDirectoriesViewModel>();
          }
       }
 
