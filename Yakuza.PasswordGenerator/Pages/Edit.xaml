@@ -49,6 +49,7 @@
                   <CheckBox Name="UseDigits" Content="Use digits" IsChecked="{Binding UseDigits, Mode=TwoWay}"/>
                   <CheckBox Name="UseCapitals" Content="Use capital letters" IsChecked="{Binding UseCapitalLetters, Mode=TwoWay}"/>
                   <CheckBox Name="TagAsCurrentMonth" Content="Use current month as Tag" IsChecked="{Binding TagAsCurrentMonth, Mode=TwoWay}"/>
+                  <TextBox Name="Labels" Header="Labels (whitespace separated)" InputScope="AlphanumericFullWidth" Text="{Binding Labels, Mode=TwoWay}"/>
                </StackPanel>
             </ScrollViewer>
          </Grid>

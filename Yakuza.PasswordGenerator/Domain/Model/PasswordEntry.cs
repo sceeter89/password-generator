@@ -14,6 +14,7 @@ namespace Yakuza.PasswordGenerator.Model
       private bool _tagAsCurrentMonth;
       private bool _useCapitalLetters;
       private bool _useDigits;
+      private string _labels;
 
       [PrimaryKey]
       [AutoIncrement]
@@ -103,6 +104,16 @@ namespace Yakuza.PasswordGenerator.Model
          set
          {
             _passwordLength = value;
+            OnPropertyChanged();
+         }
+      }
+
+      public string Labels
+      {
+         get { return _labels; }
+         set
+         {
+            _labels = value;
             OnPropertyChanged();
          }
       }

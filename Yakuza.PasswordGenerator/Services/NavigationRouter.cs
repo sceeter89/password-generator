@@ -31,7 +31,7 @@ namespace Yakuza.PasswordGenerator.Services
 
       private void HandleBrowsingDirectories(OpenDirectoriesBrowserMessage obj)
       {
-         _navigation.Navigate(typeof(BrowseDirectories));
+         _navigation.Navigate(typeof(BrowseLabels));
       }
 
       private void HandleNavigationBack(GoBack obj)

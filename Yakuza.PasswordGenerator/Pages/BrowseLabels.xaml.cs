@@ -1,20 +1,7 @@
 ﻿using Yakuza.PasswordGenerator.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Yakuza.PasswordGenerator.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -23,18 +10,18 @@ namespace Yakuza.PasswordGenerator.Pages
    /// <summary>
    /// An empty page that can be used on its own or navigated to within a Frame.
    /// </summary>
-   public sealed partial class BrowseDirectories : Page
+   public sealed partial class BrowseLabels : Page
    {
-      private NavigationHelper navigationHelper;
-      private ObservableDictionary defaultViewModel = new ObservableDictionary();
+      private NavigationHelper _navigationHelper;
+      private ObservableDictionary _defaultViewModel = new ObservableDictionary();
 
-      public BrowseDirectories()
+      public BrowseLabels()
       {
          this.InitializeComponent();
 
-         this.navigationHelper = new NavigationHelper(this);
-         this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-         this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+         this._navigationHelper = new NavigationHelper(this);
+         this._navigationHelper.LoadState += this.NavigationHelper_LoadState;
+         this._navigationHelper.SaveState += this.NavigationHelper_SaveState;
       }
 
       /// <summary>
@@ -42,7 +29,7 @@ namespace Yakuza.PasswordGenerator.Pages
       /// </summary>
       public NavigationHelper NavigationHelper
       {
-         get { return this.navigationHelper; }
+         get { return this._navigationHelper; }
       }
 
       /// <summary>
@@ -51,7 +38,7 @@ namespace Yakuza.PasswordGenerator.Pages
       /// </summary>
       public ObservableDictionary DefaultViewModel
       {
-         get { return this.defaultViewModel; }
+         get { return this._defaultViewModel; }
       }
 
       /// <summary>
@@ -98,14 +85,20 @@ namespace Yakuza.PasswordGenerator.Pages
       /// handlers that cannot cancel the navigation request.</param>
       protected override void OnNavigatedTo(NavigationEventArgs e)
       {
-         this.navigationHelper.OnNavigatedTo(e);
+         this._navigationHelper.OnNavigatedTo(e);
       }
 
       protected override void OnNavigatedFrom(NavigationEventArgs e)
       {
-         this.navigationHelper.OnNavigatedFrom(e);
+         this._navigationHelper.OnNavigatedFrom(e);
       }
 
       #endregion
+
+      private void ItemClicked(object sender, ItemClickEventArgs e)
+      {
+         var browseLabelsViewModel = DataContext as BrowseLabelsViewModel;
+         browseLabelsViewModel.ShowLabelsCommand.Execute(e.ClickedItem as string);
+      }
    }
 }
