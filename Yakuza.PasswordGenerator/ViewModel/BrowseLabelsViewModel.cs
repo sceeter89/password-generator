@@ -4,6 +4,7 @@ using Yakuza.PasswordGenerator.Messages.Actions;
 using System.Collections;
 using Yakuza.PasswordGenerator.Services;
 using GalaSoft.MvvmLight.Command;
+using System;
 
 namespace Yakuza.PasswordGenerator.ViewModel
 {
@@ -15,7 +16,12 @@ namespace Yakuza.PasswordGenerator.ViewModel
       {
          _bus = bus;
          _bus.Register<ShowLabelsBrowser>(this, e => RebuildLabelsList());
-         ShowLabelsCommand = new RelayCommand<string>(label => _bus.Send(new SearchForEntryMessage(label)));
+         ShowLabelsCommand = new RelayCommand<string>(Show);
+      }
+
+      private void Show(string label)
+      {
+         _bus.Send(new SearchForEntryMessage(label));
       }
 
       private void RebuildLabelsList()

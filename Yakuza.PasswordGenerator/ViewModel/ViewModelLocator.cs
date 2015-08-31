@@ -25,7 +25,7 @@ namespace Yakuza.PasswordGenerator.ViewModel
          SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
          SimpleIoc.Default.Register<EditViewModel>();
-         SimpleIoc.Default.Register<SearchViewModel>();
+         SimpleIoc.Default.Register<SearchViewModel>(true);
          SimpleIoc.Default.Register<DetailsViewModel>();
          SimpleIoc.Default.Register<BrowseLabelsViewModel>();
          SimpleIoc.Default.Register<MainViewModel>();

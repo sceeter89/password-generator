@@ -29,8 +29,7 @@
 
       <!-- Title Panel -->
       <StackPanel Grid.Row="0" Margin="19,0,0,0">
-         <TextBlock Text="browse catalog" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-         <TextBlock Text="{Binding Current.Path}" Margin="0,-6.5,0,26.5" Style="{ThemeResource SubheaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+         <TextBlock Text="labels" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
       </StackPanel>
 
       <!--TODO: Content should be placed within the following grid-->
@@ -44,24 +43,9 @@
                <ListView.ItemTemplate>
                   <DataTemplate>
                      <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Domain}"
+                        <TextBlock Text="{Binding}"
                                        Style="{ThemeResource ListViewItemTextBlockStyle}"
                                        Margin="19,0,0,19" />
-
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"
-                                    Margin="10 0 0 19">
-                           <StackPanel.Resources>
-                              <Style TargetType="TextBlock">
-                                 <Setter Property="FontSize" Value="15"/>
-                                 <Setter Property="Foreground" Value="DarkGray"/>
-                              </Style>
-                           </StackPanel.Resources>
-                           <TextBlock Text="("/>
-                           <TextBlock Text="{Binding Username}"/>
-                           <TextBlock Text=", "/>
-                           <TextBlock Text="{Binding Tag}"/>
-                           <TextBlock Text=")"/>
-                        </StackPanel>
                      </StackPanel>
                   </DataTemplate>
                </ListView.ItemTemplate>

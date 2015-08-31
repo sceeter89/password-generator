@@ -1,6 +1,6 @@
 ﻿using QKit.JumpList;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using Windows.UI.Xaml.Data;
 using Yakuza.PasswordGenerator.Model;
 
@@ -10,7 +10,7 @@ namespace Yakuza.PasswordGenerator.Converters
    {
       public object Convert(object value, Type targetType, object parameter, string language)
       {
-         var input = value as ObservableCollection<PasswordEntry>;
+         var input = value as IEnumerable<PasswordEntry>;
          if (input != null)
             return input.ToAlphaGroups(x => x.Domain);
 
