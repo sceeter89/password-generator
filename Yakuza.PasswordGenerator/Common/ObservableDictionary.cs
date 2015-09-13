@@ -23,7 +23,7 @@ namespace Yakuza.PasswordGenerator.Common
          public string Key { get; private set; }
       }
 
-      private Dictionary<string, object> _dictionary = new Dictionary<string, object>();
+      private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
       public event MapChangedEventHandler<string, object> MapChanged;
 
       private void InvokeMapChanged(CollectionChange change, string key)

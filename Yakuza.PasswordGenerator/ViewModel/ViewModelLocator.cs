@@ -32,6 +32,7 @@ namespace Yakuza.PasswordGenerator.ViewModel
 
          SimpleIoc.Default.Register<NavigationRouter>(createInstanceImmediately: true);
          SimpleIoc.Default.Register<AddPasswordEntryHandler>(createInstanceImmediately: true);
+         SimpleIoc.Default.Register<DeleteEntryHandler>(createInstanceImmediately: true);
       }
 
       public MainViewModel Main

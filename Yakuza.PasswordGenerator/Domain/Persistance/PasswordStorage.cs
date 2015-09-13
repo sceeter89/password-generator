@@ -64,7 +64,7 @@ namespace Yakuza.PasswordGenerator.Services
          using (var connection = NewConnection())
          {
             connection.CreateTable<PasswordEntry>();
-            entry.Labels = entry.Labels.ToLower();
+            entry.Labels = (entry.Labels ?? "").ToLower();
             connection.Update(entry);
             connection.Commit();
          }

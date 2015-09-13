@@ -23,7 +23,7 @@ namespace Yakuza.PasswordGenerator.Common
    internal sealed class SuspensionManager
    {
       private static Dictionary<string, object> _sessionState = new Dictionary<string, object>();
-      private static List<Type> _knownTypes = new List<Type>();
+      private static readonly List<Type> _knownTypes = new List<Type>();
       private const string sessionStateFilename = "_sessionState.xml";
 
       /// <summary>
@@ -132,13 +132,13 @@ namespace Yakuza.PasswordGenerator.Common
          }
       }
 
-      private static DependencyProperty FrameSessionStateKeyProperty =
+      private static readonly DependencyProperty FrameSessionStateKeyProperty =
           DependencyProperty.RegisterAttached("_FrameSessionStateKey", typeof(String), typeof(SuspensionManager), null);
-      private static DependencyProperty FrameSessionBaseKeyProperty =
+      private static readonly DependencyProperty FrameSessionBaseKeyProperty =
           DependencyProperty.RegisterAttached("_FrameSessionBaseKeyParams", typeof(String), typeof(SuspensionManager), null);
-      private static DependencyProperty FrameSessionStateProperty =
+      private static readonly DependencyProperty FrameSessionStateProperty =
           DependencyProperty.RegisterAttached("_FrameSessionState", typeof(Dictionary<String, Object>), typeof(SuspensionManager), null);
-      private static List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
+      private static readonly List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
 
       /// <summary>
       /// Registers a <see cref="Frame"/> instance to allow its navigation history to be saved to
